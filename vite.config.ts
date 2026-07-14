@@ -5,7 +5,12 @@ import babel from '@rolldown/plugin-babel'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
+    babel({
+      presets: [reactCompilerPreset()],
+      plugins: [
+        ['babel-plugin-styled-components', { displayName: true }]
+      ]
+    }),
     react(),
-    babel({ presets: [reactCompilerPreset()] })
   ],
 })
