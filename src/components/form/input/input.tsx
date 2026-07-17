@@ -1,12 +1,10 @@
 import styled from 'styled-components';
-import type { FieldProps, FieldValue, InputProps } from '../form';
-import { forwardRef, useImperativeHandle, useRef } from 'react';
+import type { FieldProps } from '../../../type/field';
 
-interface InputTextProps extends InputProps {
-    maxlength?: number;
-    minlength?: number;
-    required?: boolean;
-
+interface InputTextProps extends FieldProps {
+    readonly?: boolean;
+    placeholder?: string;
+    disabled?: boolean;
 
     onInput?: (value: string) => void;
 }
@@ -54,40 +52,27 @@ const StyledInputText = styled.input`
     }
 `;
 
-const InputText = forwardRef<FieldProps, InputTextProps>((props, ref) => {
-
-    const inputRef = useRef<HTMLInputElement>(null);
-    
-    useImperativeHandle(ref, () => ({
-        setValue: (value: FieldValue) => {
-            if (inputRef.current) {
-                inputRef.current.value = value as string;
-            }
-        },
-        getValue: () => {
-            return inputRef.current?.value || '';
-        }
-    }));
-    
+const InputText = (props: InputTextProps) => {
 
     return (
         <StyledInputText
             type="text"
-            ref={inputRef}
-            defaultValue={props.defaultValue}
             name={props.name}
-            className={`input-text-field`}
+            className={`form-field`}
             placeholder={props.placeholder}
             disabled={props.disabled}
-            readOnly={props.readonly}
-            required={props.required}
-            maxLength={props.maxlength}
-            minLength={props.minlength}
+
+            data-validate={props.validateState}
+            defaultValue={props.defaultValue}
 
             onChange={(e) => props.onChange?.(e.target.value)}
             onInput={(e) => props.onInput?.(e.currentTarget.value)}
-        />
+        >
+
+        </StyledInputText>
     );
-});
+};
+
+
 
 export default InputText;

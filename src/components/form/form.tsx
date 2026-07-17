@@ -1,33 +1,16 @@
-interface InputProps extends FieldProps {
-    name: string;
+import type { ReactNode, RefObject } from "react";
 
-    placeholder?: string;
-    defaultValue?: string;
-    autocomplete?: 'on' | 'off';
-    disabled?: boolean;
-    readonly?: boolean;
-    required?: boolean;
 
-    onChange?: (value: string | number) => void;
+interface FormProps {
+    ref: RefObject<HTMLFormElement>,
+    children: ReactNode
 }
 
+const Form = (props: FormProps) => {
+    return (
+        <form {...props}>
+        </form>
+    );
+};
 
-type FieldValue = string | number | null;
-
-interface FieldProps {
-    value?: FieldValue;
-    setValue?: (value: FieldValue) => void;
-}
-
-
-interface ValidateProps {
-    required?: boolean;
-    minlength?: number;
-    maxlength?: number;
-    min?: number;
-    max?: number;
-    function?: (value: FieldValue) => boolean;
-}
-
-
-export type { InputProps, FieldProps, FieldValue, ValidateProps };
+export default Form;
