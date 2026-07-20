@@ -1,5 +1,5 @@
 import './App.css'
-import InputText from './components/form/input/input'
+import SelectSingle from './components/form/select/select_single_options'
 import Body from './components/main/body/body'
 import Header from './components/main/header/header'
 import Navbar from './components/main/navbar/navbar'
@@ -12,13 +12,9 @@ function App() {
     <div className='app-main-body'>
       <Navbar mode='side'></Navbar>
       <Body>
-        <InputText
-          name='test'
-          placeholder='Enter text here'
-          maxlength={50}
-          minlength={5}
-          required={true}
-          onChange={(value) => console.log('Input changed:', value)}
+        <SelectSingle
+          name='ad'
+          
         />
       </Body>
     </div>

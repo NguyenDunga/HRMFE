@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@floating-ui/dom": "^1.8.0",
     "antd": "^6.5.0",
+    "feather-icons": "^4.29.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router-dom": "^7.18.1",

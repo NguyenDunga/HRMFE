@@ -1,30 +1,54 @@
-import styled from "styled-components";
 import type { FieldProps, FieldValue } from "../../../type/field";
+import { StyledInputSelect, StyledSelect } from "./select.style";
 
-interface SelectSingleProps extends FieldProps {
+
+type DataListProps = Array<object> | {
+    list: Array<object>,
+    key: string
+    name: string,
+    render?: (key: string, value: FieldValue, object: object) => FieldValue
+}
+
+type DataTreeProps = {
+    list: Array<object>,
+    key: string,
+    name: string
+    childrenKey: string,
+    render?: (key: string, value: FieldValue, object: object, children: Array<object>) => FieldValue
+}
+
+
+export interface SelectSingleProps extends FieldProps {
     isValid?: boolean;
-    option: Record<string, FieldValue>
-
+    dataList?: DataListProps,
+    dataTree?: DataTreeProps,
+    multiple?: boolean,
 }
 
-const StyledSelect = styled.select`
-    
-`;
+export function Select(props: SelectSingleProps) {
 
-export default function Select(props: SelectSingleProps) {
+    return <div className="field-select-container">
+        <StyledSelect
+            className="controlled"
+            name={props.name}
+            disabled={props.disabled}
+            defaultValue={props.defaultValue}
+            multiple={props.multiple}
+            onChange={(e) => props.onChange?.(e.target.value)}
+        >
+        </StyledSelect>
+        <StyledInputSelect
+            type="text"
+            name={props.name}
+            className={`form-field`}
+            placeholder={props.placeholder}
+            disabled={props.disabled}
 
-
-    return <StyledSelect
-        name={props.name}
-        className={`form-field`}
-
-        defaultValue={props.defaultValue}
-        data-validate={props.validateState}
-
-        onChange={(e) => props.onChange?.(e.target.value)}
-    >
-         {Object.entries(props?.option).map(e => (
-                <option key={e[0]}>{e[1]}</option>
-            )) }
-    </StyledSelect>
+            data-validate={props.validateState}
+            defaultValue={props.defaultValue}
+        >
+        </StyledInputSelect>
+    </div>
 }
+
+export default Select;
