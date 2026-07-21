@@ -1,9 +1,30 @@
 import styled from "styled-components";
 
+const StyledSelectContainer = styled.div`
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    
+  .dropdown-field {
+    opacity: 0;
+  visibility: hidden;
+  }
+
+  .form-field:focus + .dropdown-field {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0s linear 0s; 
+  }
+`;
+
 
 const StyledSelect = styled.select`
     display: none;
 `;
+
 
 const StyledInputSelect = styled.input`
     height: var(--input-height);
@@ -51,14 +72,25 @@ const StyledInputSelect = styled.input`
         display: none;
     }
 `;
-
 const StyledPopupSelect = styled.div`
-  width  : 100px;
+  min-width: 100%;
   min-height: 100px;
+  max-height: 40vh;
+  background-color: var(--color-bg);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  transform: translateY(-6px);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0s linear 0.15s; 
+  transform-origin: top center;
+  overflow-x: hidden;
+  overflow-y: auto;
 `;
 
 
 export {
+    StyledSelectContainer,
     StyledInputSelect,
     StyledPopupSelect,
     StyledSelect

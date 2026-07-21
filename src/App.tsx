@@ -12,10 +12,31 @@ function App() {
     <div className='app-main-body'>
       <Navbar mode='side'></Navbar>
       <Body>
-        <SelectSingle
+        <div
+          style={{
+            marginTop: 100
+          }}
+        >
+          <SelectSingle
           name='ad'
-          
+          dataList={{
+            key: 'key',
+            value: 'value',
+            list: [{
+              key: 'kakakakakakaka',
+              value: 'kakakakakakakakakakakakakakakakakakakakakakakakakakakakakakakakakakaka'
+            },
+            {
+              key: 'kb',
+              value: 'vb'
+            },
+            {
+              key: 'kc',
+              value: 'vc'
+            }]
+          }}
         />
+        </div>
       </Body>
     </div>
   </div>

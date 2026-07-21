@@ -2,15 +2,15 @@ import type { FieldProps, FieldValue } from "../../../type/field";
 import { StyledInputSelect, StyledSelect } from "./select.style";
 
 
-type DataListProps = Array<object> | {
-    list: Array<object>,
+export type DataListProps = {
+    list: Array<Record<string, FieldValue>>,
     key: string
-    name: string,
+    value: string,
     render?: (key: string, value: FieldValue, object: object) => FieldValue
 }
 
-type DataTreeProps = {
-    list: Array<object>,
+export type DataTreeProps = {
+    list: Array<Record<string, FieldValue>>,
     key: string,
     name: string
     childrenKey: string,

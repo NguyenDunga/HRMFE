@@ -10,7 +10,7 @@ export interface FieldProps {
     validateState?: boolean;
     defaultValue?: string;
 
-    onChange?: (value: string | number) => void;
+    onChange?: (value: FieldValue) => void;
 }
 
 
