@@ -5,8 +5,9 @@ const StyledSelectContainer = styled.div`
     display: flex;
     flex-direction: column;
     position: relative;
+    align-items: center;
+    justify-content: center;
 
-    
   .dropdown-field {
     opacity: 0;
   visibility: hidden;
@@ -17,6 +18,10 @@ const StyledSelectContainer = styled.div`
     visibility: visible;
     transform: translateY(0);
     transition: opacity 0.15s ease, transform 0.15s ease, visibility 0s linear 0s; 
+  }
+
+  &:has(.form-field:focus) .field-select-icon {
+    transform: rotate(90deg);
   }
 `;
 
@@ -37,6 +42,8 @@ const StyledInputSelect = styled.input`
     border-radius: var(--radius-md);
     outline: none;
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+    padding-right: var(--input-height);
+    text-overflow: ellipsis;
 
     &::placeholder {
         color: var(--color-placeholder);
@@ -89,9 +96,65 @@ const StyledPopupSelect = styled.div`
 `;
 
 
+const StyledOptionArrow = styled.div`
+    position: absolute;
+    right: 0;
+    height: 100%;
+    aspect-ratio: 1/1;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    transform: rotate(0);
+    transition: transform 0.15s ease;
+`;
+
+
+
+const StyledOption = styled.div`
+    display: flex;
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+    font-family: var(--font-family);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height);
+    color: var(--color-text);
+    background-color: transparent;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+
+    &:hover {
+        background-color: var(--color-hover-bg);
+        color: var(--color-hover-text);
+    }
+
+    &.selected {
+        background-color: var(--color-primary-muted);
+        color: var(--color-primary);
+    }
+
+    &.focused,
+    &:focus-visible {
+        background-color: var(--color-focus-bg);
+        color: var(--color-focus-text);
+        outline: none;
+        box-shadow: inset 0 0 0 var(--border-width-focus) var(--color-focus-border);
+    }
+
+    &[aria-disabled="true"] {
+        color: var(--color-disabled-text);
+        background-color: var(--color-disabled-bg);
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+`;
+
 export {
     StyledSelectContainer,
     StyledInputSelect,
     StyledPopupSelect,
+    StyledOptionArrow,
+    StyledOption,
     StyledSelect
 }

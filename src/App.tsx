@@ -12,7 +12,7 @@ function App() {
     <div className='app-main-body'>
       <Navbar mode='side'></Navbar>
       <Body>
-        <div
+        <form
           style={{
             marginTop: 100
           }}
@@ -36,7 +36,7 @@ function App() {
             }]
           }}
         />
-        </div>
+        </form>
       </Body>
     </div>
   </div>

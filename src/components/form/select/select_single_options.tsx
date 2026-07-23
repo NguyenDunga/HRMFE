@@ -1,15 +1,17 @@
 import type { DataListProps, SelectSingleProps } from "./select";
 import { flip, offset, useFloating } from '@floating-ui/react';
-import { StyledInputSelect, StyledPopupSelect, StyledSelect, StyledSelectContainer } from "./select.style";
+import { StyledInputSelect, StyledOption, StyledOptionArrow, StyledPopupSelect, StyledSelect, StyledSelectContainer } from "./select.style";
 import { useEffect, useRef, useState } from "react";
-import { StyledOptionSingle } from "./select_single_options.style";
 import type { FieldValue } from "../../../type/field";
+import { ChevronDown } from "feather-icons-react";
 
 export function SelectSingle(props: SelectSingleProps) {
 
     const selectRef = useRef<HTMLSelectElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+
     const [inputValue, setInputValue] = useState('');
+
     const [options, setOptions] = useState<DataListProps>({
         list: [],
         key: '',
@@ -50,12 +52,16 @@ export function SelectSingle(props: SelectSingleProps) {
             multiple={props.multiple}
             onChange={(e) => props.onChange?.(e.target.value)}
         >
+            {options.list.map((item) => (
+                <option key={item[options.key]} value={item[options.key]?.toString()}>
+                    {item[options.value]}
+                </option>
+            ))}
         </StyledSelect>
         <StyledInputSelect
             ref={inputRef}
             value={inputValue}
             type="text"
-            name={props.name}
             className={`form-field`}
             placeholder={props.placeholder}
             disabled={props.disabled}
@@ -79,17 +85,23 @@ export function SelectSingle(props: SelectSingleProps) {
             ref={refs.setFloating}
         >
             {options.list.map((item) => (
-                <StyledOptionSingle
+                <StyledOption
                     key={item[options.key]}
+                    className={item[options.key] == selectRef.current?.value ? "selected" : undefined}
                     onMouseDown={(e) => {
                         e.preventDefault(); // stop input blur before click registers
                         handleOnClick(item);
                     }}
                 >
                     {item[options.value]}
-                </StyledOptionSingle>
+                </StyledOption>
             ))}
         </StyledPopupSelect>
+        <StyledOptionArrow
+            className="field-select-icon"
+        >
+            <ChevronDown></ChevronDown>
+        </StyledOptionArrow>
     </StyledSelectContainer>
 }
 
