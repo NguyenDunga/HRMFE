@@ -1,5 +1,5 @@
 import './App.css'
-import SelectSingle from './components/form/select/select_single_options'
+import SelectMultiple from './components/form/select/select_multiple_options'
 import Body from './components/main/body/body'
 import Header from './components/main/header/header'
 import Navbar from './components/main/navbar/navbar'
@@ -17,7 +17,7 @@ function App() {
             marginTop: 100
           }}
         >
-          <SelectSingle
+          <SelectMultiple
           name='ad'
           dataList={{
             key: 'key',

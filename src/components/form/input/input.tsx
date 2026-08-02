@@ -1,34 +1,20 @@
-import type { FieldProps } from '../../../type/field';
 import StyledInputText from './input.style';
 
-interface InputTextProps extends FieldProps {
-    
-
-    onInput?: (value: string) => void;
+interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
-
 const InputText = (props: InputTextProps) => {
+    const { 
+        ...rest 
+    }
+     = props;
 
     return (
         <StyledInputText
+            {...rest}
             type="text"
-            name={props.name}
-            className={`form-field`}
-            placeholder={props.placeholder}
-            disabled={props.disabled}
-
-            data-validate={props.validateState}
-            defaultValue={props.defaultValue}
-
-            onChange={(e) => props.onChange?.(e.target.value)}
-            onInput={(e) => props.onInput?.(e.currentTarget.value)}
-        >
-
-        </StyledInputText>
+        />
     );
 };
-
-
 
 export default InputText;

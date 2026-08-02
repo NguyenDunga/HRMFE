@@ -1,13 +1,16 @@
-import type { DataListProps, SelectSingleProps } from "./select";
-import { flip, offset, useFloating } from '@floating-ui/react';
-import { StyledInputSelect, StyledOption, StyledOptionArrow, StyledPopupSelect, StyledSelect, StyledSelectContainer } from "./select.style";
 import { useEffect, useRef, useState } from "react";
-import type { FieldValue } from "../../../type/field";
+import { flip, offset, useFloating } from '@floating-ui/react';
 import { ChevronDown } from "feather-icons-react";
 
-export function SelectSingle(props: SelectSingleProps) {
+import { StyledIconPseudo, StyledInputSelect, StyledOption, StyledPopupSelect, StyledSelectPseudoRight, StyledSelect, StyledSelectContainer } from "./select.style";
 
-    const selectRef = useRef<HTMLSelectElement>(null);
+import type { DataListProps, SelectOptionsProps } from "./select";
+import type { FieldValue } from "../form";
+
+export function SelectSingle(props: SelectOptionsProps) {
+    const { ...rest } = props;
+
+    const selectRef = useRef<HTMLInputElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
     const [inputValue, setInputValue] = useState('');
@@ -27,10 +30,14 @@ export function SelectSingle(props: SelectSingleProps) {
     const handleOnClick = (item: Record<string, FieldValue>) => {
         const displayValue = item[options.value];
         const actualValue = item[options.key];
-        // if (inputRef.current) inputRef.current.value = displayValue?.toString() || '';
         setInputValue(displayValue?.toString() || '');
-        if (selectRef.current) selectRef.current.value = actualValue?.toString() || '';
-        props.onChange?.(actualValue);
+
+        if (selectRef.current) {
+            selectRef.current.value = actualValue?.toString() || '';
+            const changeEvent = new Event("change", { bubbles: true });
+            selectRef.current?.dispatchEvent(changeEvent);
+        }
+
         inputRef.current?.blur();
     };
 
@@ -44,24 +51,15 @@ export function SelectSingle(props: SelectSingleProps) {
         ref={refs.setReference}
     >
         <StyledSelect
+            {...rest}
             className="controlled"
             ref={selectRef}
-            name={props.name}
-            disabled={props.disabled}
-            defaultValue={props.defaultValue}
-            multiple={props.multiple}
-            onChange={(e) => props.onChange?.(e.target.value)}
         >
-            {options.list.map((item) => (
-                <option key={item[options.key]} value={item[options.key]?.toString()}>
-                    {item[options.value]}
-                </option>
-            ))}
         </StyledSelect>
         <StyledInputSelect
+            type="text"
             ref={inputRef}
             value={inputValue}
-            type="text"
             className={`form-field`}
             placeholder={props.placeholder}
             disabled={props.disabled}
@@ -69,8 +67,6 @@ export function SelectSingle(props: SelectSingleProps) {
             autoCorrect={"off"}
             autoCapitalize={"off"}
             spellCheck={"false"}
-
-            data-validate={props.validateState}
             defaultValue={props.defaultValue}
 
             onInput={(e) => {
@@ -97,11 +93,13 @@ export function SelectSingle(props: SelectSingleProps) {
                 </StyledOption>
             ))}
         </StyledPopupSelect>
-        <StyledOptionArrow
-            className="field-select-icon"
-        >
-            <ChevronDown></ChevronDown>
-        </StyledOptionArrow>
+        <StyledSelectPseudoRight>
+            <StyledIconPseudo
+                className="field-select-icon"
+            >
+                <ChevronDown></ChevronDown>
+            </StyledIconPseudo>
+        </StyledSelectPseudoRight>
     </StyledSelectContainer>
 }
 

@@ -26,14 +26,14 @@ const StyledSelectContainer = styled.div`
 `;
 
 
-const StyledSelect = styled.select`
+const StyledSelect = styled.input`
     display: none;
 `;
 
 
 const StyledInputSelect = styled.input`
     height: var(--input-height);
-    padding: 0 var(--space-md);
+    padding: 0 var(--space-sm);
     font-family: var(--font-family);
     font-size: var(--font-size-md);
     color: var(--color-text);
@@ -96,16 +96,29 @@ const StyledPopupSelect = styled.div`
 `;
 
 
-const StyledOptionArrow = styled.div`
+const StyledSelectPseudoRight = styled.div`
     position: absolute;
     right: 0;
+    display: flex;
+    /* height: stretch; */
     height: 100%;
     aspect-ratio: 1/1;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    transform: rotate(0);
-    transition: transform 0.15s ease;
+`;
+
+const StyledIconPseudo = styled.div`
+  aspect-ratio: 1/1;
+  transform: rotate(0);
+  transition: transform 0.15s ease;
+  height: auto;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--input-height) / 4);
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 
@@ -154,7 +167,8 @@ export {
     StyledSelectContainer,
     StyledInputSelect,
     StyledPopupSelect,
-    StyledOptionArrow,
+    StyledSelectPseudoRight,
+    StyledIconPseudo,
     StyledOption,
     StyledSelect
 }

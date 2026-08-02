@@ -1,5 +1,4 @@
-import type { FieldProps, FieldValue } from "../../../type/field";
-import { StyledInputSelect, StyledSelect } from "./select.style";
+import type { FieldValue } from "../form";
 
 
 export type DataListProps = {
@@ -18,37 +17,8 @@ export type DataTreeProps = {
 }
 
 
-export interface SelectSingleProps extends FieldProps {
+export interface SelectOptionsProps extends React.InputHTMLAttributes<HTMLInputElement> {
     isValid?: boolean;
     dataList?: DataListProps,
     dataTree?: DataTreeProps,
-    multiple?: boolean,
 }
-
-export function Select(props: SelectSingleProps) {
-
-    return <div className="field-select-container">
-        <StyledSelect
-            className="controlled"
-            name={props.name}
-            disabled={props.disabled}
-            defaultValue={props.defaultValue}
-            multiple={props.multiple}
-            onChange={(e) => props.onChange?.(e.target.value)}
-        >
-        </StyledSelect>
-        <StyledInputSelect
-            type="text"
-            name={props.name}
-            className={`form-field`}
-            placeholder={props.placeholder}
-            disabled={props.disabled}
-
-            data-validate={props.validateState}
-            defaultValue={props.defaultValue}
-        >
-        </StyledInputSelect>
-    </div>
-}
-
-export default Select;
